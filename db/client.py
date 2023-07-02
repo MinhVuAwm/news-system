@@ -31,4 +31,5 @@ class Client:
             if i == id:
                 print('id is exist')
                 return False
+            return True
         # kiểm tra xem bài báo có id như này đã tồn tại chưa
