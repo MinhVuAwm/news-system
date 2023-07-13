@@ -15,7 +15,24 @@ class Client:
         self.client = pyodbc.connect(connection_string)
 
     def get_connection(self):
+        print('Connected to database!')
         return self.client
-    
-    def get_cursor(self):
-        return self.client.cursor()
+
+    def close_connection(self):
+        if self.client:
+            print('Closed connection!')
+            return self.client.close()
+
+    def get_cursor(self, query):
+        cursor = self.client.cursor()
+        cursor.execute(query)
+        result = cursor.fetchall()
+        cursor.close()
+        return result
+
+    def update(self, query):
+        cursor = self.client.cursor()
+        cursor.execute(query)
+        self.client.commit()
+        cursor.close
+        print('Update is succusfully!')
